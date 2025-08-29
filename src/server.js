@@ -6,9 +6,31 @@ import dotenv from 'dotenv'
 import sharp from 'sharp'
 import connectDB from './configs/db.js'
 import Story from './models/Story.js'
+import helmet from 'helmet'
 
 dotenv.config()
 const app = express()
+
+app.use(
+	helmet.contentSecurityPolicy({
+		directives: {
+			defaultSrc: ["'self'"], // Chỉ cho phép tải tài nguyên từ chính domain của bạn theo mặc định
+			scriptSrc: ["'self'"], // Chỉ cho phép script từ domain của bạn (quan trọng cho script Local Storage)
+			styleSrc: ["'self'"], // Chỉ cho phép CSS từ domain của bạn
+			imgSrc: [
+				"'self'",
+				'data:',
+				'https://i2.hako.vip',
+				'https://i.hako.vn',
+			], // Cho phép ảnh từ domain của bạn, ảnh dạng data: (inline), và các domain ảnh gốc
+			connectSrc: ["'self'"], // Cho phép kết nối (fetch, XHR) đến domain của bạn
+			fontSrc: ["'self'"], // Cho phép font từ domain của bạn
+			objectSrc: ["'none'"], // Không cho phép các plugin như <object>, <embed>
+			upgradeInsecureRequests: [], // Tự động chuyển http sang https
+		},
+	}),
+)
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
