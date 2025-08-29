@@ -1,0 +1,15 @@
+# .github/workflows/keep-alive.yml
+
+name: Keep Render Service Alive
+
+on:
+    schedule:
+        # Chạy mỗi 10 phút
+        - cron: '*/10 * * * *'
+
+jobs:
+    ping:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Ping the render service
+              run: curl -s "https://cong-ln-kindle.onrender.com" > /dev/null
