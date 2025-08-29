@@ -1,0 +1,154 @@
+/* public/css/style.css */
+body {
+	font-family: Georgia, 'Times New Roman', serif; /* Font chữ serif dễ đọc trên e-ink */
+	line-height: 1.6;
+	background-color: #ffffff;
+	color: #000000;
+	/* max-width: 800px; Giới hạn chiều rộng để dễ đọc */
+	margin: 0 auto;
+	padding: 15px;
+}
+
+h1,
+h2 {
+	border-bottom: 2px solid #333;
+	padding-bottom: 10px;
+	margin-top: 30px;
+}
+
+h1 {
+	font-size: 2em; /* em giúp co giãn tốt hơn */
+}
+
+h2 {
+	font-size: 1.5em;
+}
+
+img {
+	text-align: center;
+}
+
+ul {
+	list-style-type: none;
+}
+
+.volume {
+	margin-bottom: 40px;
+}
+
+/* Home Page */
+input[type='text'] {
+	width: 70%;
+	height: 30px;
+	margin-bottom: 10px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 18px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.story-item {
+	margin-bottom: 20px;
+	padding: 15px;
+	border-bottom: 1px solid #ccc;
+}
+
+.story-item a {
+	text-decoration: none;
+	color: #00698f;
+}
+
+.story-item .description {
+	font-size: 14px;
+	color: #666;
+	margin-top: 5px;
+}
+
+/* Story Page */
+.chapter-list {
+	list-style-type: none; /* Bỏ dấu chấm đầu dòng */
+	padding: 0;
+}
+
+.chapter-container {
+	padding: 10px;
+	font-size: 3rem;
+}
+
+.chapter-item {
+	padding: 10px 5px;
+	border-bottom: 1px solid #ccc;
+	display: flex; /* Dùng flex cơ bản để sắp xếp */
+	justify-content: space-between;
+	align-items: center;
+}
+
+.chapter-item a {
+	text-decoration: none;
+	color: #000000;
+	font-weight: bold;
+	font-size: 1.1em;
+	/* Làm cho vùng có thể click lớn hơn, dễ bấm trên Kindle */
+	display: block;
+	width: 100%;
+}
+
+.chapter-item a:hover {
+	background-color: #f0f0f0; /* Hiệu ứng hover đơn giản */
+}
+
+.chapter-time {
+	font-size: 0.9em;
+	color: #555555;
+	white-space: nowrap; /* Đảm bảo thời gian không bị xuống dòng */
+	margin-left: 15px;
+}
+
+.chapter-header {
+	text-align: center;
+	margin-bottom: 40px;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 20px;
+}
+
+.chapter-header h2 {
+	margin-bottom: 5px;
+	border: none; /* Ghi đè style cũ */
+}
+
+.chapter-header h4 {
+	margin-top: 0;
+	font-weight: normal;
+	color: #333;
+}
+
+#chapter-content p {
+	margin-bottom: 1.2em; /* Tạo khoảng cách giữa các đoạn văn */
+	text-indent: 1.5em; /* Thụt lề đầu dòng cho dễ đọc */
+	font-size: 40px;
+}
+
+.chapter-nav {
+	margin-top: 40px;
+	padding-top: 20px;
+	border-top: 2px solid #333;
+	text-align: center;
+}
+
+.nav-button {
+	text-decoration: none;
+	color: #000;
+	font-weight: bold;
+	padding: 10px 15px;
+	border: 1px solid #000;
+	border-radius: 5px;
+	font-size: 30px;
+	display: inline-block;
+}
+
+.nav-button:hover {
+	background-color: #f0f0f0;
+}

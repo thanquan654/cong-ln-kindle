@@ -1,0 +1,20 @@
+{{! views/home.hbs }}
+<h1>Danh sách truyện</h1>
+
+<form action='/add-story' method='POST'>
+	<input type='text' name='storyLink' placeholder='Nhập link truyện' />
+	<button type='submit'>Craw dữ liệu</button>
+</form>
+
+{{#if stories}}
+	<ul>
+		{{#each stories}}
+			<li class='story-item'>
+				<a href='/story?url={{this.url}}'>{{this.title}}</a>
+				<p class='description'>Tác giả: {{this.author}}</p>
+			</li>
+		{{/each}}
+	</ul>
+{{else}}
+	<p>Chưa có truyện nào</p>
+{{/if}}
