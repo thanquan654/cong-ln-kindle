@@ -33,9 +33,9 @@ const BASE_URL = 'https://docln.sbs'
 
 // Routes
 app.get('/', async (req, res) => {
-	const stories = await Story.find()
+	const stories = await Story.find().lean()
 
-	res.render('home', { stories })
+	res.render('home', { title: 'Cổng LN - Kindle Version', stories })
 })
 
 app.post('/add-story', async (req, res) => {
@@ -63,6 +63,16 @@ app.post('/add-story', async (req, res) => {
 	const savedStory = await Story.create(newStory)
 
 	res.status(200).redirect('/').json(savedStory)
+})
+
+app.post('/delete-story', async (req, res) => {
+	const { storyId } = req.body
+
+	await Story.findByIdAndDelete(storyId)
+
+	res.status(200)
+		.redirect('/')
+		.json({ message: 'Story deleted successfully' })
 })
 
 app.get('/story', async (req, res) => {
@@ -181,6 +191,7 @@ app.get('/read', async (req, res) => {
 
 		// 4. Render template `chapter.hbs` với dữ liệu đã cào
 		res.render('chapter', {
+			title: chapterTitle,
 			storyUrl,
 			volumeTitle,
 			chapterTitle,

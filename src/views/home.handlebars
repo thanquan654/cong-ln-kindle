@@ -12,6 +12,7 @@
 			<li class='story-item'>
 				<a href='/story?url={{this.url}}'>{{this.title}}</a>
 				<p class='description'>Tác giả: {{this.author}}</p>
+                <form action="/delete-story" method="POST"><input type="hidden" name="storyId" value="{{this._id}}"><button type="submit" >Xóa Truyện</button"></form>
 			</li>
 		{{/each}}
 	</ul>
