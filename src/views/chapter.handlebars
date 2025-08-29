@@ -1,0 +1,48 @@
+{{! views/chapter.hbs }}
+<div class='chapter-container'>
+	<nav class='chapter-nav'>
+		{{#if prevChapterUrl}}
+			<a href='/read?url={{prevChapterUrl}}' class='nav-button prev'>
+				&larr; Chương Trước
+			</a>
+		{{/if}}
+
+		<a href='/story?url={{storyUrl}}' class='nav-button home'>
+			Mục Lục
+		</a>
+
+		{{#if nextChapterUrl}}
+			<a href='/read?url={{nextChapterUrl}}' class='nav-button next'>
+				Chương Sau &rarr;
+			</a>
+		{{/if}}
+	</nav>
+
+	<div class='chapter-header'>
+		<h2>{{volumeTitle}}</h2>
+		<h4>{{chapterTitle}}</h4>
+	</div>
+
+	<div id='chapter-content'>
+		{{! DÙNG 3 DẤU NGOẶC NHỌN ĐỂ RENDER HTML }}
+		{{{contentHtml}}}
+	</div>
+
+	<nav class='chapter-nav'>
+		{{#if prevChapterUrl}}
+			<a href='/read?url={{prevChapterUrl}}' class='nav-button prev'>
+				&larr; Chương Trước
+			</a>
+		{{/if}}
+
+		<a href='/story?url={{storyUrl}}' class='nav-button home'>
+			Mục Lục
+		</a>
+
+		{{#if nextChapterUrl}}
+			<a href='/read?url={{nextChapterUrl}}' class='nav-button next'>
+				Chương Sau &rarr;
+			</a>
+		{{/if}}
+	</nav>
+</div>

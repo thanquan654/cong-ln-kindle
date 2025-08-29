@@ -1,0 +1,21 @@
+{{! views/home.hbs }}
+<a href='/' style='font-size: 30px;'>Go to Home</a>
+<h1>{{title}}</h1>
+
+{{#each volumes}}
+	<section class='volume'>
+		<h2>{{this.title}}</h2>
+
+		{{#if this.chapters}}
+			<ul class='chapter-list'>
+				{{#each this.chapters}}
+					<li class='chapter-item'>
+						<a href='/read?url={{this.url}}'>{{this.title}}</a>
+					</li>
+				{{/each}}
+			</ul>
+		{{else}}
+			<p>Chưa có chương nào trong tập này.</p>
+		{{/if}}
+	</section>
+{{/each}}
