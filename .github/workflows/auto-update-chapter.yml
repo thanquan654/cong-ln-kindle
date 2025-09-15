@@ -1,0 +1,12 @@
+name: Auto Update Chapter Every Day
+
+on:
+    schedule:
+        - cron: '*/1440 0 * * *'
+
+jobs:
+    ping:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Ping the render service
+              run: curl -s "https://cong-ln-kindle.onrender.com/update-all-story" > /dev/null

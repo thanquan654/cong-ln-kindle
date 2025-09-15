@@ -1,10 +1,7 @@
-# .github/workflows/keep-alive.yml
-
 name: Keep Render Service Alive
 
 on:
     schedule:
-        # Chạy mỗi 10 phút
         - cron: '*/10 * * * *'
 
 jobs:
