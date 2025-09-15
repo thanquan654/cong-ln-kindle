@@ -1,23 +1,26 @@
 {{! views/chapter.hbs }}
 <div class='chapter-container'>
 	<nav class='chapter-nav story-action'>
-			<a href='/read?storyId={{storyId}}&url={{prevChapterUrl}}' class='nav-button prev'>
-				<button {{#ifeq prevChapterUrl null}}disabled{{/ifeq}}>
-					&larr; Chương Trước
-				</button>
-			</a>
-
+        <a href='/read?storyId={{storyId}}&url={{prevChapterUrl}}' class='nav-button prev'>
+            <button {{#ifeq prevChapterUrl null}}disabled{{/ifeq}}>
+                &larr; Chương Trước
+            </button>
+        </a>
 		<a href='/story/{{storyId}}' class='nav-button home'>
             <button>
 			    Mục Lục
             </button>
 		</a>
-
-			<a href='/read?storyId={{storyId}}&url={{nextChapterUrl}}' class='nav-button next'>
-                <button {{#ifeq nextChapterUrl null}}disabled{{/ifeq}}>
-				    Chương Sau &rarr;
-                </button>
-			</a>
+        <a href='/'>
+            <button>
+                Trang Chủ
+            </button>
+        </a>
+        <a href='/read?storyId={{storyId}}&url={{nextChapterUrl}}' class='nav-button next'>
+            <button {{#ifeq nextChapterUrl null}}disabled{{/ifeq}}>
+                Chương Sau &rarr;
+            </button>
+        </a>
 	</nav>
 
     <hr />
@@ -33,22 +36,25 @@
 	</div>
 
 	<nav class='chapter-nav story-action'>
-			<a href='/read?storyId={{storyId}}&url={{prevChapterUrl}}' class='nav-button prev'>
-				<button {{#ifeq prevChapterUrl null}}disabled{{/ifeq}}>
-					&larr; Chương Trước
-				</button>
-			</a>
-
+        <a href='/read?storyId={{storyId}}&url={{prevChapterUrl}}' class='nav-button prev'>
+            <button {{#ifeq prevChapterUrl null}}disabled{{/ifeq}}>
+                &larr; Chương Trước
+            </button>
+        </a>
 		<a href='/story/{{storyId}}' class='nav-button home'>
             <button>
 			    Mục Lục
             </button>
 		</a>
-
-			<a href='/read?storyId={{storyId}}&url={{nextChapterUrl}}' class='nav-button next'>
-                <button {{#ifeq nextChapterUrl null}}disabled{{/ifeq}}>
-				    Chương Sau &rarr;
-                </button>
-			</a>
+        <a href='/'>
+            <button>
+                Trang Chủ
+            </button>
+        </a>
+        <a href='/read?storyId={{storyId}}&url={{nextChapterUrl}}' class='nav-button next'>
+            <button {{#ifeq nextChapterUrl null}}disabled{{/ifeq}}>
+                Chương Sau &rarr;
+            </button>
+        </a>
 	</nav>
 </div>

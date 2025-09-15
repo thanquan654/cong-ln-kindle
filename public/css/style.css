@@ -82,6 +82,12 @@ button {
 	text-decoration: none;
 	color: #000;
 }
+.story-link-wrapper > button {
+	height: 350px;
+	text-align: left;
+	background-color: transparent;
+	border: none;
+}
 
 .story-link-wrapper:hover {
 	background-color: #f0f0f0;
@@ -122,8 +128,10 @@ button {
 	font-size: 1em;
 	line-height: 1.5;
 	opacity: 0.8;
+	margin-top: 5px;
 	color: #333;
 	text-decoration: none;
+	overflow-y: hidden;
 }
 
 .clearfix::after {
