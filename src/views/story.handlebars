@@ -1,23 +1,72 @@
 {{! views/home.hbs }}
-<a href='/' style='font-size: 30px;'>Go to Home</a>
-<a href='#bottom' style='font-size: 30px;margin-left: 20px;'>Go to Bottom</a>
-<h1>{{title}}</h1>
+<div class="story-page story-action">
+    <a href='/'>
+        <button>
+        Go to Home
+        </button>
+    </a>
+</div>
 
-{{#each volumes}}
-	<section class='volume'>
-		<h2>{{this.title}}</h2>
+<hr />
 
-		{{#if this.chapters}}
-			<ul class='chapter-list'>
-				{{#each this.chapters}}
-					<li class='chapter-item'>
-						<a href='/read?url={{this.url}}'>{{this.title}}</a>
-					</li>
-				{{/each}}
-			</ul>
-		{{else}}
-			<p>Chưa có chương nào trong tập này.</p>
+{{! Phần thông tin truyện }}
+<div class='story-info-container'>
+	<div class='story-cover'>
+		<img
+			src='/proxy-image?url={{encodeURIComponent story.coverImageUrl}}'
+			alt='Bìa truyện {{story.title}}'
+		/>
+	</div>
+
+	<div class='story-info'>
+		<h3 class='story-title'>{{story.title}}</h3>
+
+		{{#if story.author}}
+			<span class='story-desc'>Tác giả: {{story.author}}</span>
 		{{/if}}
-	</section>
-{{/each}}
-<div id='bottom'></div>
+
+		{{#if story.artist}}
+			<span class='story-desc' >Minh họa:
+				{{story.artist}}</span>
+		{{/if}}
+
+		{{#if story.summary}}
+			<p class='story-desc'>{{truncate
+					story.summary
+					200
+				}}</p>
+		{{/if}}
+	</div>
+</div>
+
+{{! Phần chương truyện }}
+<div class="story-action story-page">
+    <a href="/story/{{story._id}}?vol=1">
+        <button {{#ifeq currentVolume 1}}disabled{{/ifeq}}>Tập đầu</button>
+    </a>
+    <a href="/story/{{story._id}}?vol={{add currentVolume -1}}">
+        <button {{#ifeq currentVolume 1}}disabled{{/ifeq}}>Tập trước</button>
+    </a>
+    <span>Tập {{currentVolume}}/{{story.numberOfVolumes}}</span>
+    <a href="/story/{{story._id}}?vol={{add currentVolume 1}}">
+        <button {{#ifeq currentVolume story.numberOfVolumes}}disabled{{/ifeq}}>Tập kế tiếp</button>
+    </a>
+    <a href="/story/{{story._id}}?vol={{story.numberOfVolumes}}">
+        <button {{#ifeq currentVolume story.numberOfVolumes}}disabled{{/ifeq}}>Tập cuối</button>
+    </a>
+</div>
+<section class='volume'>
+	<h2>{{volume.title}}</h2>
+
+	{{#if volume.chapters}}
+		<ul class='chapter-list'>
+			{{#each volume.chapters}}
+				<li class='chapter-item'>
+					<a href='/read?storyId={{@root.story._id}}&url={{this.url}}'>{{this.title}}</a>
+				</li>
+			{{/each}}
+		</ul>
+	{{else}}
+		<p>Chưa có chương nào trong tập này.</p>
+	{{/if}}
+</section>

@@ -6,7 +6,7 @@ body {
 	color: #000000;
 	/* max-width: 800px; Giới hạn chiều rộng để dễ đọc */
 	margin: 0 auto;
-	padding: 15px;
+	padding: 10px;
 }
 
 h1,
@@ -30,14 +30,26 @@ img {
 
 ul {
 	list-style-type: none;
+	padding: 0;
 }
 
-.volume {
-	margin-bottom: 40px;
+a {
+	text-decoration: none;
 }
+
+button {
+	height: 60px;
+	padding: 0 15px;
+	border-radius: 5px;
+	font-size: 30px;
+}
+
+/* .volume {
+	margin-bottom: 40px;
+} */
 
 /* Home Page */
-input[type='text'] {
+/* input[type='text'] {
 	width: 70%;
 	height: 30px;
 	margin-bottom: 10px;
@@ -65,11 +77,11 @@ input[type='text'] {
 	font-size: 14px;
 	color: #666;
 	margin-top: 5px;
-}
+} */
 
 /* Story Page */
-.chapter-list {
-	list-style-type: none; /* Bỏ dấu chấm đầu dòng */
+/* .chapter-list {
+	list-style-type: none;
 	padding: 0;
 }
 
@@ -81,7 +93,7 @@ input[type='text'] {
 .chapter-item {
 	padding: 10px 5px;
 	border-bottom: 1px solid #ccc;
-	display: flex; /* Dùng flex cơ bản để sắp xếp */
+	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
@@ -91,19 +103,18 @@ input[type='text'] {
 	color: #000000;
 	font-weight: bold;
 	font-size: 1.1em;
-	/* Làm cho vùng có thể click lớn hơn, dễ bấm trên Kindle */
 	display: block;
 	width: 100%;
 }
 
 .chapter-item a:hover {
-	background-color: #f0f0f0; /* Hiệu ứng hover đơn giản */
+	background-color: #f0f0f0;
 }
 
 .chapter-time {
 	font-size: 0.9em;
 	color: #555555;
-	white-space: nowrap; /* Đảm bảo thời gian không bị xuống dòng */
+	white-space: nowrap;
 	margin-left: 15px;
 }
 
@@ -116,7 +127,7 @@ input[type='text'] {
 
 .chapter-header h2 {
 	margin-bottom: 5px;
-	border: none; /* Ghi đè style cũ */
+	border: none;
 }
 
 .chapter-header h4 {
@@ -126,8 +137,8 @@ input[type='text'] {
 }
 
 #chapter-content p {
-	margin-bottom: 1.2em; /* Tạo khoảng cách giữa các đoạn văn */
-	text-indent: 1.5em; /* Thụt lề đầu dòng cho dễ đọc */
+	margin-bottom: 1.2em;
+	text-indent: 1.5em;
 	font-size: 40px;
 }
 
@@ -151,4 +162,192 @@ input[type='text'] {
 
 .nav-button:hover {
 	background-color: #f0f0f0;
+} */
+
+/* NEW */
+
+/* HOME PAGE */
+.add-story-input {
+	width: 820px;
+	height: 60px;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 30px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.add-story-button {
+	height: 60px;
+	padding: 0 15px;
+	border-radius: 5px;
+	font-size: 30px;
+}
+
+.story-list {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.story-item {
+	border-bottom: 1px solid #ccc;
+	padding: 15px 0;
+}
+
+.story-link-wrapper {
+	display: block;
+	text-decoration: none;
+	color: #000;
+}
+
+.story-link-wrapper:hover {
+	background-color: #f0f0f0;
+}
+
+.story-cover {
+	float: left;
+	width: 200px;
+	margin-right: 15px;
+}
+
+.story-cover img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+.story-info h3,
+.story-info p {
+	margin-top: 0;
+	margin-bottom: 8px;
+}
+
+.story-title {
+	font-size: 1.4em;
+	line-height: 1.3;
+}
+
+.story-desc {
+	font-size: 1.1em;
+	color: #101010;
+	font-style: italic;
+	margin-right: 25px;
+	text-decoration: none;
+}
+
+.story-summary {
+	font-size: 1em;
+	line-height: 1.5;
+	opacity: 0.8;
+	color: #333;
+	text-decoration: none;
+}
+
+.clearfix::after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.story-action {
+	margin-top: 15px;
+	display: block;
+}
+.story-action form {
+	display: inline-block;
+	margin-right: 10px;
+}
+.story-action button {
+	height: 60px;
+	padding: 0 15px;
+	border-radius: 5px;
+	font-size: 35px;
+}
+.story-action button::hover {
+	background-color: #f0f0f0;
+}
+
+/* STORY PAGE */
+.story-info-container {
+	display: block;
+	height: 350px;
+}
+
+.story-page.story-action {
+	text-align: center;
+}
+
+.story-page.story-action button {
+	margin-right: 20px;
+}
+.story-page.story-action span {
+	font-size: 35px;
+	margin: 0 20px;
+}
+
+.chapter-list {
+	list-style-type: none;
+	padding: 0;
+}
+
+.chapter-container {
+	padding: 10px;
+	font-size: 3rem;
+}
+
+.chapter-item {
+	padding: 10px 5px;
+	border-bottom: 1px solid #ccc;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.chapter-item a {
+	text-decoration: none;
+	color: #000000;
+	font-weight: bold;
+	font-size: 1.1em;
+	display: block;
+	width: 100%;
+}
+
+.chapter-item a:hover {
+	background-color: #f0f0f0;
+}
+
+.chapter-header {
+	text-align: center;
+	margin-bottom: 40px;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 20px;
+}
+
+.chapter-header h2 {
+	margin-bottom: 5px;
+	border: none;
+	font-size: 1em;
+}
+
+.chapter-header h4 {
+	margin-top: 0;
+	font-size: 1.1em;
+	font-weight: normal;
+	color: #333;
+}
+
+#chapter-content p {
+	margin-bottom: 1.2em;
+	text-indent: 1.5em;
+	font-size: 40px;
+}
+
+.chapter-nav {
+	margin: 20px 0;
+	text-align: center;
 }

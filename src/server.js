@@ -8,6 +8,16 @@ import connectDB from './configs/db.js'
 import Story from './models/Story.js'
 import helmet from 'helmet'
 
+import {
+	addStory,
+	getAllStory,
+	deleteStory,
+	updateStoryChapter,
+	favoriteStory,
+	getStoryChapterList,
+	getStoryDetails,
+} from './controllers/story.controller.js'
+
 dotenv.config()
 const app = express()
 
@@ -42,6 +52,49 @@ app.engine(
 			allowProtoPropertiesByDefault: true,
 			allowProtoMethodsByDefault: true,
 		},
+		helpers: {
+			ifeq: function (a, b, opts) {
+				if (a == b) {
+					return opts.fn(this)
+				} else {
+					return opts.inverse(this)
+				}
+			},
+			add: function (a, b) {
+				return parseInt(a) + parseInt(b)
+			},
+			encodeURIComponent: function (str) {
+				return encodeURIComponent(str)
+			},
+			truncate: function (str, len) {
+				if (str.length > len && str.length > 0) {
+					var new_str = str + ' '
+					new_str = str.substr(0, len)
+					new_str = str.substr(0, new_str.lastIndexOf(' '))
+					new_str = new_str.length > 0 ? new_str : str.substr(0, len)
+					return new_str + '...'
+				}
+				return str
+			},
+			distanceTime: function (date) {
+				const differenceInMs = Date.now() - date.getTime()
+
+				const differenceInSeconds = differenceInMs / 1000
+				const differenceInMinutes = differenceInMs / (1000 * 60)
+				const differenceInHours = differenceInMs / (1000 * 60 * 60)
+				const differenceInDays = differenceInMs / (1000 * 60 * 60 * 24)
+				if (differenceInDays >= 1)
+					return `${Math.floor(differenceInDays)} ngày trước`
+
+				if (differenceInHours >= 1)
+					return `${Math.floor(differenceInHours)} giờ trước`
+
+				if (differenceInMinutes >= 1)
+					return `${Math.floor(differenceInMinutes)} phút trước`
+
+				return `${Math.ceil(differenceInSeconds)} giây trước`
+			},
+		},
 	}),
 )
 app.set('view engine', 'handlebars')
@@ -53,182 +106,19 @@ connectDB()
 const PORT = process.env.PORT || 3000
 const BASE_URL = 'https://docln.sbs'
 
-// Routes
-app.get('/', async (req, res) => {
-	const stories = await Story.find().lean()
-
-	res.render('home', { title: 'Cổng LN - Kindle Version', stories })
+// Route
+app.get('/', (req, res) => {
+	res.redirect('/story')
 })
+app.get('/story', getAllStory)
+app.post('/add-story', addStory)
+app.post('/story/:storyId', deleteStory)
+app.post('/update-story/:storyId', updateStoryChapter)
+app.post('/favorite-story/:storyId', favoriteStory)
 
-app.post('/add-story', async (req, res) => {
-	const { storyLink } = req.body
+app.get('/story/:storyId', getStoryChapterList)
 
-	const html = await axios.get(storyLink)
-
-	const $ = cheerio.load(html.data)
-
-	const storyTitle = $('span.series-name a').text().trim()
-
-	const storyUrl = storyLink
-	const storyAuthor = $(
-		'div.info-item:nth-child(2) > span:nth-child(2) > a:nth-child(1)',
-	)
-		.text()
-		.trim()
-
-	const newStory = {
-		title: storyTitle,
-		url: storyUrl,
-		author: storyAuthor,
-	}
-
-	const savedStory = await Story.create(newStory)
-
-	res.status(200).redirect('/').json(savedStory)
-})
-
-app.post('/delete-story', async (req, res) => {
-	const { storyId } = req.body
-
-	await Story.findByIdAndDelete(storyId)
-
-	res.status(200)
-		.redirect('/')
-		.json({ message: 'Story deleted successfully' })
-})
-
-app.get('/story', async (req, res) => {
-	let url = req.query.url
-
-	if (!url.startsWith(BASE_URL)) {
-		url = BASE_URL + url
-	}
-
-	const html = await axios.get(url)
-
-	const $ = cheerio.load(html.data)
-
-	// Bắt đầu cào dữ liệu
-	// 1. Lấy thông tin cơ bản của truyện
-	const storyTitle = $('span.series-name a').text().trim()
-
-	// 2. Lấy danh sách các volume
-	const volumes = []
-	$('section.volume-list').each((index, element) => {
-		const volumeElement = $(element)
-
-		// Lấy tên volume
-		const volumeTitle = volumeElement.find('.sect-title').text().trim()
-
-		// Lấy danh sách chương trong volume này
-		const chapters = []
-		volumeElement
-			.find('ul.list-chapters li')
-			.each((chapIndex, chapElement) => {
-				const chapterLinkElement =
-					$(chapElement).find('.chapter-name a')
-
-				const chapterTitle = chapterLinkElement.text().trim()
-				const chapterUrl = chapterLinkElement.attr('href')
-				const chapterTime = $(chapElement)
-					.find('.chapter-time')
-					.text()
-					.trim()
-
-				chapters.push({
-					title: chapterTitle,
-					url: chapterUrl,
-					time: chapterTime,
-				})
-			})
-
-		// Thêm volume đã xử lý vào mảng
-		volumes.push({
-			title: volumeTitle,
-			chapters: chapters,
-		})
-	})
-
-	// 3. Tổng hợp kết quả cuối cùng
-	const storyData = {
-		title: storyTitle,
-		url: url,
-		volumes: volumes,
-	}
-
-	res.render('story', storyData)
-})
-
-app.get('/read', async (req, res) => {
-	// Lấy URL tương đối của chương từ query parameter
-	const fullUrl = BASE_URL + req.query.url
-
-	if (!fullUrl) {
-		return res.status(400).send('Không tìm thấy URL của chương')
-	}
-
-	try {
-		// 1. Dùng axios để tải HTML
-		const html = await axios.get(fullUrl)
-
-		// 2. Dùng cheerio để phân tích HTML
-		const $ = cheerio.load(html.data)
-
-		// Xóa banner quảng cáo
-		$('a[target="__blank"] > img[src*="/series/chapter-banners/"]')
-			.parent()
-			.remove()
-
-		// 3. Bóc tách dữ liệu cần thiết
-		const volumeTitle = $('.title-top h2.title-item').text().trim()
-		const chapterTitle = $('.title-top h4.title-item').text().trim()
-		const storyUrl = $('a.rd_sd-button_item:nth-child(2)').attr('href')
-
-		// Lấy toàn bộ nội dung HTML bên trong div#chapter-content
-		const contentHtml = $('#chapter-content')
-
-		// Thay đổi link ảnh từ proxy cho link trên server
-		// 1. Chọn tất cả thẻ <img> bên trong div nội dung
-		contentHtml.find('img').each(function () {
-			const oldSrc = $(this).attr('src')
-
-			if (oldSrc) {
-				// 2. Tạo src mới trỏ về proxy của bạn
-				const newSrc = `/proxy-image?url=${encodeURIComponent(oldSrc)}`
-
-				// 3. Cập nhật thuộc tính src
-				$(this).attr('src', newSrc)
-			}
-		})
-
-		const modifiedContentHtml = contentHtml.html()
-
-		// Lấy link chương trước và sau
-		const prevChapterUrl = $('section.rd-basic_icon a:first-child').attr(
-			'href',
-		)
-		const nextChapterUrl = $('section.rd-basic_icon a:last-child').attr(
-			'href',
-		)
-
-		// 4. Render template `chapter.hbs` với dữ liệu đã cào
-		res.render('chapter', {
-			title: chapterTitle,
-			storyUrl,
-			volumeTitle,
-			chapterTitle,
-			contentHtml: modifiedContentHtml,
-			prevChapterUrl,
-			nextChapterUrl,
-			layout: 'main',
-		})
-	} catch (error) {
-		console.error('Lỗi khi cào dữ liệu chương:', error.message)
-		res.status(500).send(
-			'Không thể tải nội dung chương. Vui lòng thử lại sau.',
-		)
-	}
-})
+app.get('/read', getStoryDetails)
 
 app.get('/proxy-image', async (req, res) => {
 	const imageUrl = req.query.url
@@ -277,6 +167,6 @@ app.get('/proxy-image', async (req, res) => {
 	}
 })
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
 	console.log('Server is running on http://localhost:3000')
 })
