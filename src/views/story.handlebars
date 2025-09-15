@@ -39,6 +39,18 @@
 	</div>
 </div>
 
+{{!-- Phần tiến trình --}}
+{{#if story.lastReadChapter}}
+<a href="/read?storyId={{story._id}}&url={{story.lastReadChapter.url}}">
+    <button class='story-page story-progress'>
+        <p >Tiếp tục đọc</p>
+        <p class="story-progress-chapter">{{story.lastReadChapter.chapterTitle}}</p>
+        <p class="story-progress-volume">{{story.lastReadChapter.volumeTitle}}</p>
+
+    </button>
+</a>
+{{/if}}
+
 {{! Phần chương truyện }}
 <div class="story-action story-page">
     <a href="/story/{{story._id}}?vol=1">

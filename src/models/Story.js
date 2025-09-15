@@ -9,7 +9,6 @@ const storySchema = new mongoose.Schema(
 		numberOfVolumes: { type: Number },
 		coverImageUrl: { type: String }, // URL ảnh bìa gốc
 		summary: { type: String },
-		lastScraped: { type: Date, default: Date.now }, // Lần cuối cào dữ liệu
 		volumes: [
 			{
 				title: { type: String },
@@ -22,6 +21,12 @@ const storySchema = new mongoose.Schema(
 			},
 		],
 		favorite: { type: Boolean, default: false },
+		lastReadChapter: {
+			url: { type: String },
+			chapterTitle: { type: String },
+			volumeTitle: { type: String },
+			updatedAt: { type: Date, default: Date.now },
+		},
 	},
 	{ timestamps: true },
 )

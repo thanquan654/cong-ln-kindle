@@ -39,132 +39,10 @@ a {
 
 button {
 	height: 60px;
-	padding: 0 15px;
-	border-radius: 5px;
+	padding: 5px 20px;
+	border-radius: 10px;
 	font-size: 30px;
 }
-
-/* .volume {
-	margin-bottom: 40px;
-} */
-
-/* Home Page */
-/* input[type='text'] {
-	width: 70%;
-	height: 30px;
-	margin-bottom: 10px;
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	font-size: 18px;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-}
-
-.story-item {
-	margin-bottom: 20px;
-	padding: 15px;
-	border-bottom: 1px solid #ccc;
-}
-
-.story-item a {
-	text-decoration: none;
-	color: #00698f;
-}
-
-.story-item .description {
-	font-size: 14px;
-	color: #666;
-	margin-top: 5px;
-} */
-
-/* Story Page */
-/* .chapter-list {
-	list-style-type: none;
-	padding: 0;
-}
-
-.chapter-container {
-	padding: 10px;
-	font-size: 3rem;
-}
-
-.chapter-item {
-	padding: 10px 5px;
-	border-bottom: 1px solid #ccc;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.chapter-item a {
-	text-decoration: none;
-	color: #000000;
-	font-weight: bold;
-	font-size: 1.1em;
-	display: block;
-	width: 100%;
-}
-
-.chapter-item a:hover {
-	background-color: #f0f0f0;
-}
-
-.chapter-time {
-	font-size: 0.9em;
-	color: #555555;
-	white-space: nowrap;
-	margin-left: 15px;
-}
-
-.chapter-header {
-	text-align: center;
-	margin-bottom: 40px;
-	border-bottom: 1px solid #ccc;
-	padding-bottom: 20px;
-}
-
-.chapter-header h2 {
-	margin-bottom: 5px;
-	border: none;
-}
-
-.chapter-header h4 {
-	margin-top: 0;
-	font-weight: normal;
-	color: #333;
-}
-
-#chapter-content p {
-	margin-bottom: 1.2em;
-	text-indent: 1.5em;
-	font-size: 40px;
-}
-
-.chapter-nav {
-	margin-top: 40px;
-	padding-top: 20px;
-	border-top: 2px solid #333;
-	text-align: center;
-}
-
-.nav-button {
-	text-decoration: none;
-	color: #000;
-	font-weight: bold;
-	padding: 10px 15px;
-	border: 1px solid #000;
-	border-radius: 5px;
-	font-size: 30px;
-	display: inline-block;
-}
-
-.nav-button:hover {
-	background-color: #f0f0f0;
-} */
-
-/* NEW */
 
 /* HOME PAGE */
 .add-story-input {
@@ -262,12 +140,6 @@ button {
 	display: inline-block;
 	margin-right: 10px;
 }
-.story-action button {
-	height: 60px;
-	padding: 0 15px;
-	border-radius: 5px;
-	font-size: 35px;
-}
 .story-action button::hover {
 	background-color: #f0f0f0;
 }
@@ -288,6 +160,35 @@ button {
 .story-page.story-action span {
 	font-size: 35px;
 	margin: 0 20px;
+}
+
+.story-page.story-progress {
+	height: 200px;
+	width: 100%;
+	text-align: left;
+	margin: 20px 10px;
+	margin-left: 25px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	padding: 0 10px;
+	font-size: 30px;
+	background-color: #ccc;
+}
+
+.story-page.story-progress p {
+	margin: 5px 0;
+}
+.story-page.story-progress p:first-child {
+	font-weight: bold;
+	text-align: center;
+}
+.story-page.story-progress .story-progress-chapter {
+	font-weight: bold;
+	text-align: left;
+	font-size: 1.2em;
+}
+.story-page.story-progress .story-progress-volume {
+	color: #333;
 }
 
 .chapter-list {
@@ -320,6 +221,8 @@ button {
 .chapter-item a:hover {
 	background-color: #f0f0f0;
 }
+
+/* STORY PAGE */
 
 .chapter-header {
 	text-align: center;
