@@ -2,7 +2,7 @@
 <div class="story-page story-action">
     <a href='/'>
         <button>
-        Go to Home
+            Về trang chủ
         </button>
     </a>
 </div>
@@ -40,7 +40,7 @@
 </div>
 
 {{!-- Phần tiến trình --}}
-{{#if story.lastReadChapter}}
+{{#if story.lastReadChapter.url}}
 <a href="/read?storyId={{story._id}}&url={{story.lastReadChapter.url}}">
     <button class='story-page story-progress'>
         <p >Tiếp tục đọc</p>

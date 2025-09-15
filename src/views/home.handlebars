@@ -19,40 +19,40 @@
 					href='/story/{{this._id}}'
 					class='story-link-wrapper clearfix'
 				>
+					<button>
+						{{! Phần ảnh bìa }}
+						<div class='story-cover'>
+							<img
+								src='/proxy-image?url={{encodeURIComponent
+									this.coverImageUrl
+								}}'
+								alt='Bìa truyện {{this.title}}'
+							/>
+						</div>
 
-					{{! Phần ảnh bìa }}
-					<div class='story-cover'>
-						<img
-							src='/proxy-image?url={{encodeURIComponent
-								this.coverImageUrl
-							}}'
-							alt='Bìa truyện {{this.title}}'
-						/>
-					</div>
+						{{! Phần thông tin truyện }}
+						<div class='story-info'>
+							<h3 class='story-title'>{{this.title}}</h3>
 
-					{{! Phần thông tin truyện }}
-					<div class='story-info'>
-						<h3 class='story-title'>{{this.title}}</h3>
+							{{#if this.author}}
+								<span class='story-desc'>Tác giả:
+									{{this.author}}</span>
+							{{/if}}
 
-						{{#if this.author}}
-							<span class='story-desc'>Tác giả:
-								{{this.author}}</span>
-						{{/if}}
+							{{#if this.artist}}
+								<span class='story-desc'>Minh họa:
+									{{this.artist}}</span>
+							{{/if}}
 
-						{{#if this.artist}}
-							<span class='story-desc'>Minh họa:
-								{{this.artist}}</span>
-						{{/if}}
-
-						{{#if this.summary}}
-							{{! Sử dụng helper 'truncate' để rút gọn tóm tắt còn 150 ký tự }}
-							<p class='story-desc'>{{truncate
-									this.summary
-									150
-								}}</p>
-						{{/if}}
-					</div>
-
+							{{#if this.summary}}
+								{{! Sử dụng helper 'truncate' để rút gọn tóm tắt còn 150 ký tự }}
+								<p class='story-desc'>{{truncate
+										this.summary
+										170
+									}}</p>
+							{{/if}}
+						</div>
+					</button>
 				</a>
 				<div class='story-action'>
 					<form action='/favorite-story/{{this._id}}' method='POST'>
