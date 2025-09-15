@@ -134,8 +134,6 @@ export async function updateAllStory(req, res) {
 	for (const story of stories) {
 		const volumes = await scrapeChapterList(story.storyUrl)
 
-		console.log('🚀 ~ volumes:', story.title, volumes)
-
 		await Story.updateOne(
 			{ _id: story._id },
 			{ volumes: volumes, numberOfVolumes: volumes.length },
