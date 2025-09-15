@@ -101,6 +101,15 @@ export async function getStoryDetails(req, res) {
 			nextChapterUrl,
 		} = await scrapeChapterContent(chapterUrl)
 
+		await Story.findByIdAndUpdate(storyId, {
+			lastReadChapter: {
+				url: chapterUrl,
+				chapterTitle: chapterTitle,
+				volumeTitle: volumeTitle,
+				updatedAt: Date.now(),
+			},
+		})
+
 		res.render('chapter', {
 			webTitle: chapterTitle,
 			storyId,
