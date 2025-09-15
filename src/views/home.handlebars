@@ -2,17 +2,71 @@
 <h1>Danh sách truyện</h1>
 
 <form action='/add-story' method='POST'>
-	<input type='text' name='storyLink' placeholder='Nhập link truyện' />
-	<button type='submit'>Craw dữ liệu</button>
+	<input
+		type='text'
+		name='storyLink'
+		placeholder='Nhập link truyện'
+		class='add-story-input'
+	/>
+	<button type='submit' class='add-story-button'>Craw dữ liệu</button>
 </form>
 
 {{#if stories}}
 	<ul>
 		{{#each stories}}
 			<li class='story-item'>
-				<a href='/story?url={{this.url}}'>{{this.title}}</a>
-				<p class='description'>Tác giả: {{this.author}}</p>
-                <form action="/delete-story" method="POST"><input type="hidden" name="storyId" value="{{this._id}}"><button type="submit" >Xóa Truyện</button"></form>
+				<a
+					href='/story/{{this._id}}'
+					class='story-link-wrapper clearfix'
+				>
+
+					{{! Phần ảnh bìa }}
+					<div class='story-cover'>
+						<img
+							src='/proxy-image?url={{encodeURIComponent
+								this.coverImageUrl
+							}}'
+							alt='Bìa truyện {{this.title}}'
+						/>
+					</div>
+
+					{{! Phần thông tin truyện }}
+					<div class='story-info'>
+						<h3 class='story-title'>{{this.title}}</h3>
+
+						{{#if this.author}}
+							<span class='story-desc'>Tác giả:
+								{{this.author}}</span>
+						{{/if}}
+
+						{{#if this.artist}}
+							<span class='story-desc'>Minh họa:
+								{{this.artist}}</span>
+						{{/if}}
+
+						{{#if this.summary}}
+							{{! Sử dụng helper 'truncate' để rút gọn tóm tắt còn 150 ký tự }}
+							<p class='story-desc'>{{truncate
+									this.summary
+									150
+								}}</p>
+						{{/if}}
+					</div>
+
+				</a>
+				<div class='story-action'>
+					<form action='/favorite-story/{{this._id}}' method='POST'>
+						<button>{{#if this.favorite}}Bỏ yêu thích{{else}}Yêu
+								thích{{/if}}</button>
+					</form>
+					<form action='/story/{{this._id}}' method='POST'>
+						<button>Xóa truyện</button>
+					</form>
+					<form action='/update-story/{{this._id}}' method='POST'>
+						<button>Cập nhật truyện</button>
+						<span>Cập nhật: {{distanceTime this.updatedAt}}</span>
+					</form>
+				</div>
 			</li>
 		{{/each}}
 	</ul>

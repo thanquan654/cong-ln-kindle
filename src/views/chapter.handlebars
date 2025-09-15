@@ -1,22 +1,26 @@
 {{! views/chapter.hbs }}
 <div class='chapter-container'>
-	<nav class='chapter-nav'>
-		{{#if prevChapterUrl}}
-			<a href='/read?url={{prevChapterUrl}}' class='nav-button prev'>
-				&larr; Chương Trước
+	<nav class='chapter-nav story-action'>
+			<a href='/read?storyId={{storyId}}&url={{prevChapterUrl}}' class='nav-button prev'>
+				<button {{#ifeq prevChapterUrl null}}disabled{{/ifeq}}>
+					&larr; Chương Trước
+				</button>
 			</a>
-		{{/if}}
 
-		<a href='/story?url={{storyUrl}}' class='nav-button home'>
-			Mục Lục
+		<a href='/story/{{storyId}}' class='nav-button home'>
+            <button>
+			    Mục Lục
+            </button>
 		</a>
 
-		{{#if nextChapterUrl}}
-			<a href='/read?url={{nextChapterUrl}}' class='nav-button next'>
-				Chương Sau &rarr;
+			<a href='/read?storyId={{storyId}}&url={{nextChapterUrl}}' class='nav-button next'>
+                <button {{#ifeq nextChapterUrl null}}disabled{{/ifeq}}>
+				    Chương Sau &rarr;
+                </button>
 			</a>
-		{{/if}}
 	</nav>
+
+    <hr />
 
 	<div class='chapter-header'>
 		<h2>{{volumeTitle}}</h2>
@@ -28,21 +32,23 @@
 		{{{contentHtml}}}
 	</div>
 
-	<nav class='chapter-nav'>
-		{{#if prevChapterUrl}}
-			<a href='/read?url={{prevChapterUrl}}' class='nav-button prev'>
-				&larr; Chương Trước
+	<nav class='chapter-nav story-action'>
+			<a href='/read?storyId={{storyId}}&url={{prevChapterUrl}}' class='nav-button prev'>
+				<button {{#ifeq prevChapterUrl null}}disabled{{/ifeq}}>
+					&larr; Chương Trước
+				</button>
 			</a>
-		{{/if}}
 
-		<a href='/story?url={{storyUrl}}' class='nav-button home'>
-			Mục Lục
+		<a href='/story/{{storyId}}' class='nav-button home'>
+            <button>
+			    Mục Lục
+            </button>
 		</a>
 
-		{{#if nextChapterUrl}}
-			<a href='/read?url={{nextChapterUrl}}' class='nav-button next'>
-				Chương Sau &rarr;
+			<a href='/read?storyId={{storyId}}&url={{nextChapterUrl}}' class='nav-button next'>
+                <button {{#ifeq nextChapterUrl null}}disabled{{/ifeq}}>
+				    Chương Sau &rarr;
+                </button>
 			</a>
-		{{/if}}
 	</nav>
 </div>
