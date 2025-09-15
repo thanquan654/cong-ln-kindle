@@ -16,6 +16,7 @@ import {
 	favoriteStory,
 	getStoryChapterList,
 	getStoryDetails,
+	updateAllStory,
 } from './controllers/story.controller.js'
 
 dotenv.config()
@@ -119,6 +120,8 @@ app.post('/favorite-story/:storyId', favoriteStory)
 app.get('/story/:storyId', getStoryChapterList)
 
 app.get('/read', getStoryDetails)
+
+app.post('/update-all-story', updateAllStory)
 
 app.get('/proxy-image', async (req, res) => {
 	const imageUrl = req.query.url

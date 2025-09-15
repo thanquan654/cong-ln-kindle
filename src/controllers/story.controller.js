@@ -127,3 +127,20 @@ export async function getStoryDetails(req, res) {
 		)
 	}
 }
+
+export async function updateAllStory(req, res) {
+	const stories = await Story.find().lean()
+
+	for (const story of stories) {
+		const volumes = await scrapeChapterList(story.storyUrl)
+
+		console.log('🚀 ~ volumes:', story.title, volumes)
+
+		await Story.updateOne(
+			{ _id: story._id },
+			{ volumes: volumes, numberOfVolumes: volumes.length },
+		)
+	}
+
+	res.status(200).json({ message: 'Updated all stories' })
+}
