@@ -9,4 +9,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Ping the render service
-              run: curl -s "https://cong-ln-kindle.onrender.com" > /dev/null
+              run: curl -s "${{ secrets.RENDER_SERVICE_URL }}" > /dev/null
