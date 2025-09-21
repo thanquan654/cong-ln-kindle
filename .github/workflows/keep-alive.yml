@@ -7,6 +7,9 @@ on:
 jobs:
     ping:
         runs-on: ubuntu-latest
+        env:
+            URL: ${{ secrets.RENDER_SERVICE_URL }}
+            METHOD: GET
         steps:
-            - name: Ping the render service
-              run: curl -s "${{ secrets.RENDER_SERVICE_URL }}" > /dev/null
+            - name: Ping Render service to keep it alive
+              uses: sisodiya2421/pinger@v3

@@ -2,11 +2,15 @@ name: Auto Update Chapter Every Day
 
 on:
     schedule:
-        - cron: '0 0 * * *'
+        # Runs at 13:00 UTC (20:00 Vietnam time)
+        - cron: '0 13 * * *'
 
 jobs:
     ping:
         runs-on: ubuntu-latest
+        env:
+            URL: ${{ secrets.RENDER_SERVICE_URL }}/update-all-story
+            METHOD: POST
         steps:
-            - name: Ping the render service to update all stories
-              run: curl -s "${{ secrets.RENDER_SERVICE_URL }}/update-all-story" > /dev/null
+            - name: Auto update chapter every day
+              uses: sisodiya2421/pinger@v3
