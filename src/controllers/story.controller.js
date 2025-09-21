@@ -140,5 +140,5 @@ export async function updateAllStory(req, res) {
 		)
 	}
 
-	res.status(200).json({ message: 'Updated all stories' })
+	res.status(200).redirect('/story')
 }

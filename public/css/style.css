@@ -61,9 +61,18 @@ button {
 
 .add-story-button {
 	height: 60px;
-	padding: 0 15px;
+	padding: 5 15px;
 	border-radius: 5px;
 	font-size: 30px;
+}
+
+.update-story-button {
+	height: 60px;
+	width: 100%;
+	padding: 5 15px;
+	border-radius: 5px;
+	font-size: 30px;
+	margin-top: 15px;
 }
 
 .story-list {

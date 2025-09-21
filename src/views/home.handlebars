@@ -1,5 +1,8 @@
 {{! views/home.hbs }}
-<h1>Danh sách truyện</h1>
+<div>
+	<h1>Danh sách truyện</h1>
+
+</div>
 
 <form action='/add-story' method='POST'>
 	<input
@@ -9,6 +12,12 @@
 		class='add-story-input'
 	/>
 	<button type='submit' class='add-story-button'>Craw dữ liệu</button>
+</form>
+
+<hr />
+
+<form action='/update-all-story' method='POST'>
+	<button type='submit' class='update-story-button'>Cập nhật toàn bộ truyện</button>
 </form>
 
 {{#if stories}}
