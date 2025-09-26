@@ -7,6 +7,7 @@ import sharp from 'sharp'
 import connectDB from './configs/db.js'
 import Story from './models/Story.js'
 import helmet from 'helmet'
+import morgan from 'morgan'
 
 import {
 	addStory,
@@ -100,6 +101,8 @@ app.engine(
 )
 app.set('view engine', 'handlebars')
 app.set('views', './src/views')
+
+app.use(morgan('combined'))
 
 connectDB()
 
