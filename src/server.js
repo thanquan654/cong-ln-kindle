@@ -102,7 +102,7 @@ app.engine(
 app.set('view engine', 'handlebars')
 app.set('views', './src/views')
 
-app.use(morgan('combined'))
+app.use(morgan('dev'))
 
 connectDB()
 
